@@ -17,11 +17,11 @@ class Setup:
 
         elif self.duplicate == 'no':
             while len(temp) != self.position:
-                for i in range(self.position):
-                    random_num = random.randint(1, self.colour)
-                    if str(random_num) not in temp:
-                        temp += str(random_num)
-            return temp
+                random_num = random.randint(1, self.colour)
+                if str(random_num) not in temp:
+                    temp += str(random_num)
+        self.__answer = temp
+        return temp
 
     @property
     def answer(self):
@@ -31,32 +31,29 @@ class Setup:
 class Mastermind:
     def __init__(self, guess):
         self.guess = guess
-        self.__hint = ''
+        self.hint = ''
 
     def gameplay(self, answer):
         n = 0
+        self.guess = ''
         while self.guess != answer:
             self.guess = input('Enter your guess: ')
             # elif self.guess == '9999':
             #     print(answer)
             print(f'Your guess is {self.guess}')
-            self.__hint = ''
+            self.hint = ''
             for num in range(len(self.guess)):
                 if self.guess[num] == answer[num]:
-                    self.__hint += '*'
+                    self.hint += '*'
             for num in range(len(self.guess)):
                 if self.guess[num] in answer and self.guess[num] != answer[num]:
-                    self.__hint += 'o'
+                    self.hint += 'o'
 
             print(self.hint)
             print()
             n += 1
         print(f'You solve it after {n} rounds')
         print('================================')
-
-    @property
-    def hint(self):
-        return self.__hint
 
 
 choice = ''
